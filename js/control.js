@@ -28,4 +28,5 @@ window.addEventListener('load', () => {
             '                </tr>');
         tbody.innerHTML += tRow[i];
     }
+
 })

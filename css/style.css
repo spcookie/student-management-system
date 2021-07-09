@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*清除浮动*/
+.clear::after {
+    display: table;
+    content: '';
+    clear: both;
+}
+
+/*主题居中*/
+#main {
+    background-color: rgb(240,236,233);
+    padding: 0 5%;
+}
+
+/*头部*/
+header {
+    position: relative;
+    padding: 10px 0;
+    background-color: inherit;
+}
+
+/*标题样式*/
+header>h1 {
+    position: relative;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+    color: rgb(154,154,154);
+    background-color: inherit;
+    z-index: 2;
+}
+
+/*分割线*/
+header::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: rgb(195,160,128) 4px solid;
+}
+
+/*表格样式*/
+table,td{
+    border: black 2px solid;
+    border-collapse: collapse;
+}
+
+/*隔行变色效果*/
+table>tbody>tr:nth-of-type(2n + 1) {
+    background-color: coral;
+}
+
+table>tbody>tr:nth-of-type(2n) {
+    background-color: red;
+}
+
+/*显示信息条数样式*/
+#information {
+    float: left;
+}
+
+/*翻页键*/
+#turnPage {
+    float: right;
+}
