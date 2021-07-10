@@ -47,10 +47,20 @@ header::after {
     border-bottom: rgb(195,160,128) 4px solid;
 }
 
-/*表格样式*/
+/*表格居中*/
+table {
+    margin: auto;
+}
+
+/*表格边框*/
 table,td{
-    border: black 2px solid;
+    border: black 1px solid;
     border-collapse: collapse;
+}
+
+/*行高*/
+tr {
+    height: 25px;
 }
 
 /*隔行变色效果*/
@@ -65,9 +75,12 @@ table>tbody>tr:nth-of-type(2n) {
 /*显示信息条数样式*/
 #information {
     float: left;
+    margin-left: 30%;
 }
+
 
 /*翻页键*/
 #turnPage {
     float: right;
+    margin-right: 30%;
 }

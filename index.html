@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>学生信息管理系统</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/control.js"></script>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <script src="js/table.js"></script>
+    <script src="js/popup.js" ></script>
 </head>
 <body>
     <div id="main" class="clear">
         <header>
             <h1>学生信息管理系统</h1>
         </header>
-        <div>
+        <div id="dataOperation">
             <button>新增</button>
             <button>删除</button>
         </div>
         <table>
             <thead>
                 <tr>
-                    <td><button>全选</button></td>
+                    <td>
+                        <label for="allCheck">
+                            <span>全选</span>
+                            <input type="checkbox" id="allCheck" value="unchecked">
+                        </label>
+                    </td>
                     <td>序号</td>
                     <td>学号</td>
                     <td>姓名</td>
@@ -33,7 +40,7 @@
             <tbody>
             </tbody>
         </table>
-        <div id="information">第<span></span>页,共<span></span>条,(每页显示10条)</div>
+        <div id="information">第<span></span>页,共<span></span>条,(每页显示<span></span>条)</div>
         <div id="turnPage">
             <button>上一页</button>
             <button>下一页</button>
