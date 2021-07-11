@@ -1,158 +1,25 @@
 //学生数据
-const students_data = [
+window.students_data = [
     {
         number: '12023020121',
         name: '刘伟翔',
         college: '两江人工智能学院',
+        major: '软件工程',
         grade: '2020',
         clazz: '1',
         age: '19'
-    },
-
-    {
-        number: '12023020122',
-        name: '咸小鱼',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '张三',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '2',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '李四',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '小玉',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '2',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '王富贵',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '20'
-    },
-
-    {
-        number: '12023020121',
-        name: '颜如玉',
-        college: '两江人工智能学院',
-        grade: '2021',
-        clazz: '3',
-        age: '22'
-    },
-
-    {
-        number: '12023020121',
-        name: '动力小子',
-        college: '两江人工智能学院',
-        grade: '2021',
-        clazz: '4',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-
-    {
-        number: '12023020121',
-        name: '颜如玉',
-        college: '两江人工智能学院',
-        grade: '2021',
-        clazz: '3',
-        age: '22'
-    },
-
-    {
-        number: '12023020121',
-        name: '颜如玉',
-        college: '两江人工智能学院',
-        grade: '2021',
-        clazz: '3',
-        age: '22'
-    },
-
-    {
-        number: '12023020121',
-        name: '颜如玉',
-        college: '两江人工智能学院',
-        grade: '2021',
-        clazz: '3',
-        age: '22'
     }
 ];
+//学生数据对象
+window.createData = function (number, name, college, grade, major, clazz, age) {
+    this.number = number;
+    this.name = name;
+    this.college = college;
+    this.grade = grade;
+    this.major = major;
+    this.clazz = clazz;
+    this.age = age;
+}
 
 window.addEventListener('load', () => {
     //获取表格tbody
@@ -163,7 +30,7 @@ window.addEventListener('load', () => {
     let checkButton;
 
     //向表格中添加信息函数
-    function changeInfo(page) {
+    window.changeInfo = function (page) {
         //清除全选按钮被选中状态
         allCheck.checked = false;
         let tRow = [];
@@ -177,10 +44,10 @@ window.addEventListener('load', () => {
                 '                    <td>' + students_data[i].number + '</td>\n' +
                 '                    <td>' + students_data[i].name + '</td>\n' +
                 '                    <td>' + students_data[i].college + '</td>\n' +
+                '                    <td>' + students_data[i].major + '</td>\n' +
                 '                    <td>' + students_data[i].grade + '</td>\n' +
                 '                    <td>' + students_data[i].clazz + '</td>\n' +
                 '                    <td>' + students_data[i].age + '</td>\n' +
-                '                    <td>9</td>\n' +
                 '                    <td colspan="2"><button>查看</button><button>修改</button></td>\n' +
                 '                </tr>');
         }
@@ -246,7 +113,7 @@ window.addEventListener('load', () => {
     //获取两个翻页按钮
     const turnPage = document.querySelector('#turnPage').children;
     //页数
-    let page = 1;
+    window.page = 1;
     //向上翻页
     (function pageUp() {
         turnPage[0].addEventListener('click', () => {
