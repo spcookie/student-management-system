@@ -1,5 +1,5 @@
 //弹窗构造函数
-let popup = function (typeCode) {
+window.popup = function (typeCode) {
     const mask = document.createElement('div');
     const alert = document.createElement('div');
     const type = ['新增', '修改', '查看'];
@@ -47,111 +47,81 @@ let popup = function (typeCode) {
         '            </label>\n' +
         '        </div>'
     ];
+
+    //获取输入框
+    function getInputBox() {
+        let inputBox = [];
+        let labels = alert.children[1].children;
+        for (let i = 0; i < labels.length; i++) {
+            inputBox[i] = labels[i].children[0]
+        }
+        return inputBox;
+    }
+
+    //输入框不可更改
+    function freezeInput() {
+        let inputBox = getInputBox();
+        for (let i = 0; i < inputBox.length; i++) {
+            inputBox[i].disabled = true;
+        }
+    }
+
+    //清除输入框数据
+    function clearInputValue(input, index) {
+        input[index].value = '';
+    }
+
     //创建弹框函数
     this.createPopup = function () {
         alert.innerHTML = form.join('');
-        if (typeCode === 0) {
-            alert.appendChild(submit);
-            confirmClick();
+        switch (typeCode) {
+            case 0:
+                alert.appendChild(submit);
+                confirmClick(0);
+                break;
+            case 1:
+                addDataToAlert(getDataForAlert(arguments[0]), getInputBox());
+                alert.appendChild(submit);
+                confirmClick(1, arguments[0]);
+                break;
+            case 2:
+                addDataToAlert(getDataForAlert(arguments[0]), getInputBox());
+                freezeInput();
+                break;
         }
         alert.appendChild(cancel);
-        cancel.onclick = function () {
-            mask.remove();
-        }
+        cancelClick();
         document.body.appendChild(mask);
     }
 
     //弹出框确认键点击事件
-    function confirmClick() {
+    function confirmClick(typeCode, index) {
         submit.onclick = () => {
-            let data = getDataForInput(alert);
+            let data = getDataFromInput(getInputBox());
             const errCode = isCorrectData(data);
             if (errCode == null) {
-                addData(data);
-                mask.remove();
-                window.alert('添加成功');
+                if (typeCode === 0) {
+                    addData(data);
+                    window.alert('添加成功');
+                } else if (typeCode === 1) {
+                    changeData(data, index);
+                    window.alert('修改成功');
+                } else {
+                    window.alert('发生了错误,请重新输入');
+                }
                 changeInfo(page);
+                mask.remove();
             } else {
                 window.alert('输入错误');
-                clearInputValue(alert, errCode);
+                clearInputValue(getInputBox(), errCode);
             }
         }
     }
-}
 
-//从弹窗中获取数据
-function getDataForInput(alert) {
-    let labels = alert.children[1].children;
-    let data = [];
-    for (let i = 0; i < labels.length; i++) data.push(labels[i].children[0].value);
-    return data;
-}
-
-//添加数据到学生数据中
-function addData(data) {
-    const oneOfData = new createData(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
-    students_data.push(oneOfData);
-}
-
-//校验数据合法性的方法
-const matching = {
-    num: function (num) {
-        const pattern = /^[\d]{11}$/;
-        return pattern.exec(num) != null;
-    },
-    name: function (name) {
-        const pattern = /^[\u4e00-\u9fa5]{0,4}$/;
-        return pattern.exec(name) != null;
-    },
-    college: function (college) {
-        const pattern = /^[\u4e00-\u9fa5]+学院$/;
-        return pattern.exec(college) != null;
-    },
-    major: function (grade) {
-        const pattern = /^[\u4e00-\u9fa5]{2,}$/;
-        return pattern.exec(grade) != null;
-    },
-    grade: function (grade) {
-        return 2015 <= grade && grade <= 2022;
-    },
-    clazz: function (clazz) {
-        return 0 < clazz && clazz < 4;
-    },
-    age: function (age) {
-        return 17 <= age && age <= 23;
+    //弹出框取消键点击事件
+    function cancelClick() {
+        cancel.onclick = function () {
+            mask.remove();
+        }
     }
 }
-
-//校验数据
-function isCorrectData(data) {
-    if (!matching.num(data[0])) {
-        return 0;
-    } else if (!matching.name(data[1])) {
-        return 1;
-    } else if (!matching.college(data[2])) {
-        return 2;
-    } else if (!matching.major(data[3])) {
-        return 3;
-    } else if (!matching.grade(data[4])) {
-        return 4;
-    } else if (!matching.clazz(data[5])) {
-        return 5;
-    } else if (!matching.age(data[6])) {
-        return 6;
-    } else {
-        return null;
-    }
-}
-
-//清除输入框数据
-function clearInputValue(alert, index) {
-    let input = alert.children[1].children[index].children[0];
-    input.value = '';
-}
-
-window.addEventListener('load', () => {
-    const dataOp = document.getElementById('dataOperation').children;
-    dataOp[0].onclick = function () {
-        new popup(0).createPopup();
-    }
-})
