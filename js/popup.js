@@ -1,4 +1,4 @@
-//弹窗构造函数
+//输入框弹窗
 window.popup = function (typeCode) {
     const mask = document.createElement('div');
     const alert = document.createElement('div');
@@ -58,6 +58,17 @@ window.popup = function (typeCode) {
         return inputBox;
     }
 
+    //将数据添加到查看、修改框中
+    function addDataToAlert(data, inputBox) {
+        inputBox[0].value = data.number;
+        inputBox[1].value = data.name;
+        inputBox[2].value = data.college;
+        inputBox[3].value = data.major;
+        inputBox[4].value = data.grade;
+        inputBox[5].value = data.clazz;
+        inputBox[6].value = data.age;
+    }
+
     //输入框不可更改
     function freezeInput() {
         let inputBox = getInputBox();
@@ -80,12 +91,12 @@ window.popup = function (typeCode) {
                 confirmClick(0);
                 break;
             case 1:
-                addDataToAlert(getDataForAlert(arguments[0]), getInputBox());
+                addDataToAlert(getData(arguments[0]), getInputBox());
                 alert.appendChild(submit);
                 confirmClick(1, arguments[0]);
                 break;
             case 2:
-                addDataToAlert(getDataForAlert(arguments[0]), getInputBox());
+                addDataToAlert(getData(arguments[0]), getInputBox());
                 freezeInput();
                 break;
         }
@@ -124,4 +135,34 @@ window.popup = function (typeCode) {
             mask.remove();
         }
     }
+}
+
+//操作确认弹窗
+window.inquiry = function (promptInformation) {
+    const mask = document.createElement('div');
+    const win = document.createElement('div');
+    const confirm = document.createElement('button');
+    const cancel = document.createElement('button');
+
+    (function () {
+        confirm.innerText = '确认';
+        cancel.innerText = '取消';
+        win.innerText = promptInformation;
+        mask.classList.add('mask');
+        win.classList.add('win');
+        win.append(confirm, cancel);
+        mask.append(win);
+        document.body.appendChild(mask);
+    })();
+
+    this.confirmEvent = function (event) {
+        confirm.addEventListener('click', event);
+        confirm.addEventListener('click', () => {
+            mask.remove();
+        });
+    }
+
+    cancel.onclick = () => {
+        mask.remove();
+    };
 }

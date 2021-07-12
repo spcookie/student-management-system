@@ -19,3 +19,12 @@
 .alert>div>label {
     display: block;
 }
+
+.win {
+    position: relative;
+    top: 30%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: greenyellow;
+}

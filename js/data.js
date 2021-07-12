@@ -1,5 +1,5 @@
 //学生数据
-window.students_data = [
+let students_data = [
     {
         number: '12023020121',
         name: '刘伟翔',
@@ -112,19 +112,8 @@ window.createData = function (number, name, college, major, grade, clazz, age) {
 };
 
 //从学生数据中获取数据
-function getDataForAlert(index) {
+function getData(index) {
     return students_data[index];
-}
-
-//将数据添加到查看、修改框中
-function addDataToAlert(data, inputBox) {
-    inputBox[0].value = data.number;
-    inputBox[1].value = data.name;
-    inputBox[2].value = data.college;
-    inputBox[3].value = data.major;
-    inputBox[4].value = data.grade;
-    inputBox[5].value = data.clazz;
-    inputBox[6].value = data.age;
 }
 
 //从弹窗中获取数据
@@ -143,6 +132,23 @@ function addData(data) {
 //修改学生数据
 function changeData(data, index) {
     students_data[index] = new createData(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+}
+
+//删除学生数据
+function deleteData(indexes) {
+    try {
+        for (let i = 0; i < indexes.length; i++) {
+            for (let j = indexes[i]; j < students_data.length - 1; j++) {
+                console.log('前：' + students_data[j].name);
+                students_data[j] = students_data[j + 1];
+                console.log('后：' + students_data[j].name);
+            }
+            students_data.pop();
+        }
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 //校验数据合法性的方法
