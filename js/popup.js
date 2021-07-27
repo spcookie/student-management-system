@@ -77,14 +77,32 @@ window.popup = function (typeCode) {
         }
     }
 
-    //清除输入框数据
-    function clearInputValue(input, index) {
-        input[index].value = '';
+    //清除输入框数据, 错误的红框提示
+    function clearInputValue(input, indexes) {
+        for (let i = 0; i < indexes.length; i++) {
+            input[indexes[i]].value = '';
+            input[indexes[i]].classList.add('errInput');
+        }
+        clearErr(input, indexes);
+    }
+
+    //输入框获取焦点后清除errInput样式
+    function clearErr(input, indexes) {
+        for (let i = 0; i < indexes.length; i++) {
+            if (input[indexes[i]].className === 'errInput') {
+                input[indexes[i]].addEventListener('focus', function clear() {
+                    input[indexes[i]].className = '';
+                    this.removeEventListener('focus', clear);
+                });
+            }
+        }
     }
 
     //创建弹框函数
     this.createPopup = function () {
         alert.innerHTML = form.join('');
+        alert.appendChild(cancel);
+        cancelClick();
         switch (typeCode) {
             case 0:
                 alert.appendChild(submit);
@@ -100,31 +118,26 @@ window.popup = function (typeCode) {
                 freezeInput();
                 break;
         }
-        alert.appendChild(cancel);
-        cancelClick();
-        document.body.appendChild(mask);
+        document.getElementById('main').appendChild(mask);
     }
 
     //弹出框确认键点击事件
     function confirmClick(typeCode, index) {
         submit.onclick = () => {
             let data = getDataFromInput(getInputBox());
-            const errCode = isCorrectData(data);
-            if (errCode == null) {
+            const errCodes = isCorrectData(data);
+            if (errCodes.length === 0) {
                 if (typeCode === 0) {
                     addData(data);
-                    window.alert('添加成功');
                 } else if (typeCode === 1) {
                     changeData(data, index);
-                    window.alert('修改成功');
                 } else {
                     window.alert('发生了错误,请重新输入');
                 }
                 changeInfo(page);
                 mask.remove();
             } else {
-                window.alert('输入错误');
-                clearInputValue(getInputBox(), errCode);
+                clearInputValue(getInputBox(), errCodes);
             }
         }
     }
@@ -137,22 +150,24 @@ window.popup = function (typeCode) {
     }
 }
 
-//操作确认弹窗
+//删除按钮操作确认弹窗
 window.inquiry = function (promptInformation) {
     const mask = document.createElement('div');
     const win = document.createElement('div');
+    const massage = document.createElement('div')
     const confirm = document.createElement('button');
     const cancel = document.createElement('button');
 
     (function () {
         confirm.innerText = '确认';
         cancel.innerText = '取消';
-        win.innerText = promptInformation;
+        massage.innerText = promptInformation;
         mask.classList.add('mask');
         win.classList.add('win');
-        win.append(confirm, cancel);
+        massage.classList.add('mag');
+        win.append(massage, cancel, confirm);
         mask.append(win);
-        document.body.appendChild(mask);
+        document.getElementById('main').appendChild(mask);
     })();
 
     this.confirmEvent = function (event) {

@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: "iconfont"; /* Project id  */
+    src: url('../font/iconfont.ttf?t=1627300064088') format('truetype');
+  }
+  
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+.clear::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 清除火狐浏览器数字输入框箭头 */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/*清除chrome浏览器数字输入框箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+button {
+    border: none;
+    outline: none;
+}

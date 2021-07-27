@@ -1,86 +1,334 @@
-* {
-    margin: 0;
-    padding: 0;
+html {
+    background-image: url("../img/SummerByGydwin.png");
 }
 
-/*清除浮动*/
-.clear::after {
-    display: table;
-    content: '';
-    clear: both;
-}
-
-/*主题居中*/
+/*主要内容*/
 #main {
-    background-color: rgb(240,236,233);
-    padding: 0 5%;
-}
-
-/*头部*/
-header {
     position: relative;
-    padding: 10px 0;
-    background-color: inherit;
-}
-
-/*标题样式*/
-header>h1 {
-    position: relative;
-    width: 300px;
     margin: auto;
-    text-align: center;
-    font-size: 30px;
-    color: rgb(154,154,154);
-    background-color: inherit;
-    z-index: 2;
+    width: 1200px;
+    height: 500px;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
 }
 
-/*分割线*/
-header::after {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
+/* 侧边栏 */
+.menu {
+    float: left;
+    width: 15%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu div#account {
+    width: 100px;
+    height: 100px;
+    margin: 38px auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#account img {
     width: 100%;
-    height: 0;
-    border-bottom: rgb(195,160,128) 4px solid;
+    height: 100%;
+}
+
+.menu #dataOperation {
+    width: 75px;
+    margin: auto;
+}
+
+.menu #dataOperation button {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    color: transparent;
+    font-size: 22px;
+    background: linear-gradient(to right, rgb(67,203,255),rgb(151,8,204));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.menu #dataOperation button::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background:linear-gradient(to right, rgb(67,203,255),rgb(151,8,204));
+    transition: .2s;
+}
+
+.menu #dataOperation button:hover::after {
+    width: 100%;
+}
+
+.menu #dataOperation button span {
+    display: inline-block;
+    font-size: 22px;
+}
+
+.menu #dataOperation button:first-of-type span {
+    font-size: 26px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.menu {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 
 /*表格居中*/
 table {
-    margin: auto;
+    float: left;
+    box-sizing: border-box;
+    margin: 16px 0 0 2.5%;
+    width: 80%;
+    height: 85%;
+    z-index: -5;
+}
+
+thead tr {
+    height: 50px;
+    background-color: rgba(144, 103, 255, 0.6);
+    font-size: 18px;
+    font-weight: 800;
 }
 
 /*表格边框*/
 table,td{
-    border: black 1px solid;
-    border-collapse: collapse;
+    border-spacing: 0px;
+    color: rgb(0, 0, 0);
 }
 
-/*行高*/
-tr {
-    height: 25px;
+td {
+    border: rgb(191, 170, 212) 1px solid;
+    text-align: center;
+    padding: 0 5px;
+}
+
+/* table thead td:nth-of-type(1) {
+    border-top-left-radius: 30px;
+}
+
+table thead td:last-of-type {
+    border-top-right-radius: 30px;
+}
+
+table tbody tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 30px;
+}
+
+table tbody tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: 30px;
+} */
+
+table tbody td {
+    height: 26px;
 }
 
 /*隔行变色效果*/
 table>tbody>tr:nth-of-type(2n + 1) {
-    background-color: coral;
+    background-color: rgba(203, 184, 255, 0.6);
 }
 
 table>tbody>tr:nth-of-type(2n) {
-    background-color: red;
+    background-color: rgba(181, 154, 254, 0.6);
 }
+
+/* 全选按钮 */
+#allCheck {
+    width: 3em;
+    display: none;
+}
+
+label[for="allCheck"] {
+    display: block;
+    position: relative;
+    margin: auto;
+    width: 42px;
+    height: 22px;
+}
+
+#allCheck+div {
+    display: block;
+    position: relative;
+    width: 38px;
+    height: 18px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 20px;
+    background-color: rgba(203, 184, 255, 0.6);
+}
+
+#allCheck+div::after {
+    content: "";
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    transition: .2s;
+}
+
+#allCheck:checked+div::after {
+    left: 22px;
+}
+
+#allCheck:checked+div {
+    background-color: transparent;
+}
+
+
+/* 单选按钮 */
+.checkButton {
+    position: relative;
+    visibility: hidden;
+}
+
+.checkButton::after {
+    content: "";
+    visibility: initial !important;
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: #fff;
+    background-clip: content-box;
+    box-shadow: 0 0 0 3px rgb(203, 184, 255) inset;
+    transition: all .2s;
+}
+
+.checkButton:checked::after {
+    box-shadow: 0 0 0 6px rgb(90, 86, 188) inset;
+}
+
+/* 查看、修改键 */
+tbody tr td:nth-last-of-type(1) button {
+    position: relative;
+    margin-right: 2px;
+    width: 50px;
+    height: 25px;
+	text-align: center;
+	color: #fff;
+	box-sizing: border-box;
+    border: none;
+	background: linear-gradient(to right, rgb(110, 207, 245),rgb(114, 101, 230));
+	border-radius: 10px;
+}
+
+tbody button.modify {
+    margin-left: 2px;
+    background: linear-gradient(to right, rgb(114, 101, 230), rgb(110, 207, 245)) !important;
+}
+
+/* 查看，修改键发光 */
+tbody tr td:nth-last-of-type(1) button::after {
+    content: '';
+	position: absolute;
+	top: -3px;
+	left: -3px;
+    width: 58px;
+    height: 30px;
+	z-index: -1;
+	background: rgb(255,228,152);
+	border-radius: 40px;
+	opacity: 0;
+	transition: 0.2s;
+}
+
+tbody tr td:nth-last-of-type(1) button:hover::after {
+    filter: blur(5px);
+	opacity: 1;
+}
+
 
 /*显示信息条数样式*/
 #information {
     float: left;
-    margin-left: 30%;
+    margin: 14px 0 0 3%;
+    box-sizing: border-box;
+    width: 240px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgba(67,203,255, 0.8);
 }
-
 
 /*翻页键*/
 #turnPage {
     float: right;
-    margin-right: 30%;
+    margin: 1% 3%;
+}
+
+div#turnPage button {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    margin: 0 8px;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgb(110, 207, 245),rgb(114, 101, 230));
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.wave {
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgb(174, 232, 255);
+    animation: wave .5s linear 0s 1;
+}
+
+@keyframes wave {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    50% {
+        width: 150px;
+        height: 150px;
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+body div.pageWring {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    padding: 16px;
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    border-radius: 16px;
+    background-color: rgba(255, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    font-size: 20px;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    animation: show .2s 1;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

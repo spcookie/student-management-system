@@ -1,4 +1,13 @@
 window.addEventListener('load', () => {
+    //动态垂直居中
+    const container = document.getElementById('container');
+    let windowSize = document.documentElement.clientHeight;
+    container.style.marginTop = (windowSize - 500) / 2 + 'px';
+    window.onresize = () => {
+        windowSize = document.documentElement.clientHeight;
+        container.style.marginTop = (windowSize - 500) / 2 + 'px';
+    }
+
     //获取新增、删除按钮
     const dataOp = document.getElementById('dataOperation').children;
     //新增按钮绑定事件
@@ -17,12 +26,11 @@ window.addEventListener('load', () => {
             let tipsIndex = buttonIndexes.join(',');
             deleteInquiry = new inquiry('确认删除第' + tipsIndex + '行？');
         } else {
-            deleteInquiry = new inquiry('确认删除第1行？');
+            deleteInquiry = new inquiry('确认删除第1行?');
             dataIndexes[0] = (page - 1) * stripOfPage;
         }
         deleteInquiry.confirmEvent(() => {
-            console.log(dataIndexes);
-            deleteData(dataIndexes) ? window.alert('删除成功') : window.alert('删除失败');
+            deleteData(dataIndexes);
             changeInfo(page);
         });
     }
@@ -74,6 +82,7 @@ window.addEventListener('load', () => {
         //补全表格
         for (let i = 0; i < stripOfPage - length; i++) {
             tRow.push('<tr>\n' +
+                '                    <td>&nbsp;</td>\n' +
                 '                    <td></td>\n' +
                 '                    <td></td>\n' +
                 '                    <td></td>\n' +
@@ -82,8 +91,7 @@ window.addEventListener('load', () => {
                 '                    <td></td>\n' +
                 '                    <td></td>\n' +
                 '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td colspan="2"></td>\n' +
+                '                    <td colspan="2">&nbsp;</td>\n' +
                 '                </tr>');
         }
         tbody.innerHTML = tRow.join('');
@@ -143,7 +151,8 @@ window.addEventListener('load', () => {
         //查看、修改按钮
         const view = document.getElementsByClassName('view');
         const modify = document.getElementsByClassName('modify');
-        for (let i = 0; i < length; i++) {
+        const count = view.length;
+        for (let i = 0; i < count; i++) {
             view[i].onclick = () => {
                 let dataIndex = page - 1 + i;
                 new popup(2).createPopup(dataIndex);
@@ -157,11 +166,24 @@ window.addEventListener('load', () => {
 
     //获取两个翻页按钮
     const turnPage = document.querySelector('#turnPage').children;
+    //翻页键点击波纹效果
+    for (let i = 0; i < 2; i++) {
+        turnPage[i].addEventListener('click', (e) => {
+            let bg = turnPage[i].children[0];
+            bg.style.top = e.offsetY + 'px';
+            bg.style.left = e.offsetX + 'px';
+            bg.classList.add('wave');
+            setTimeout(() => {
+                bg.className = '';
+            }, 500);
+        });
+    }
+
     //向上翻页
     (function pageUp() {
         turnPage[0].addEventListener('click', () => {
             if (page === 1) {
-                alert('已经是第一页');
+                pageAlert('已是第一页!');
             } else {
                 page--;
                 changeInfo(page);
@@ -172,13 +194,27 @@ window.addEventListener('load', () => {
     (function pageDown() {
         turnPage[1].addEventListener('click', () => {
             if (page * stripOfPage >= students_data.length) {
-                alert('已经是最后一页');
+                pageAlert('已是最后一页!');
             } else {
                 page++;
                 changeInfo(page);
             }
         })
     })();
+
+    //翻页弹窗
+    function pageAlert(massage) {
+        if (main.children.length === 4) {
+            const pageWring = document.createElement('div');
+            pageWring.classList.add('pageWring');
+            const main = document.getElementById('main');
+            pageWring.innerHTML = massage;
+            main.appendChild(pageWring);
+            setTimeout(() => {
+                main.removeChild(pageWring);
+            }, 800);
+        }
+    }
 
     //第一次添加信息
     changeInfo(page);

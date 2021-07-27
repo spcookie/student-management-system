@@ -1,5 +1,8 @@
-//学生数据
-let students_data = [
+
+//账户数据ID
+let studentDataID = [];
+
+studentDataID.push([
     {
         number: '12023020121',
         name: '刘伟翔',
@@ -99,7 +102,18 @@ let students_data = [
         clazz: '1',
         age: '19'
     }
-];
+]);
+
+//账户学生数据
+let students_data = [];
+
+//获取账户中数据
+(function getDataFromAccount() {
+    const info = window.location.search;
+    const ID = info.substr(4, 1);
+    students_data = studentDataID[ID];
+})();
+
 //学生数据对象
 window.createData = function (number, name, college, major, grade, clazz, age) {
     this.number = number;
@@ -139,9 +153,7 @@ function deleteData(indexes) {
     try {
         for (let i = 0; i < indexes.length; i++) {
             for (let j = indexes[i]; j < students_data.length - 1; j++) {
-                console.log('前：' + students_data[j].name);
                 students_data[j] = students_data[j + 1];
-                console.log('后：' + students_data[j].name);
             }
             students_data.pop();
         }
@@ -182,21 +194,27 @@ const matching = {
 
 //校验数据
 function isCorrectData(data) {
+    let errCodes = [];
     if (!matching.num(data[0])) {
-        return 0;
-    } else if (!matching.name(data[1])) {
-        return 1;
-    } else if (!matching.college(data[2])) {
-        return 2;
-    } else if (!matching.major(data[3])) {
-        return 3;
-    } else if (!matching.grade(data[4])) {
-        return 4;
-    } else if (!matching.clazz(data[5])) {
-        return 5;
-    } else if (!matching.age(data[6])) {
-        return 6;
-    } else {
-        return null;
+        errCodes.push(0);
     }
+    if (!matching.name(data[1])) {
+        errCodes.push(1);
+    }
+    if (!matching.college(data[2])) {
+        errCodes.push(2);
+    }
+    if (!matching.major(data[3])) {
+        errCodes.push(3);
+    }
+    if (!matching.grade(data[4])) {
+        errCodes.push(4);
+    }
+    if (!matching.clazz(data[5])) {
+        errCodes.push(5);
+    }
+    if (!matching.age(data[6])) {
+        errCodes.push(6);
+    }
+    return errCodes;
 }

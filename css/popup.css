@@ -5,26 +5,90 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(196, 132, 53, 0.5);
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.alert {
+.alert, .win {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background-color: rgb(181, 154, 254);
+    animation: scale-in-center .4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     z-index: 999;
-    background-color: red;
+}
+
+ @keyframes scale-in-center {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+       opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+       opacity: 1;
+    }
+  }
+  
+.alert h3 {
+    margin-bottom: 10px;
+    font-size: 26px;
+    color: rgba(0, 0, 0, 0.8);
+    letter-spacing: 4px;
 }
 
 .alert>div>label {
     display: block;
+    margin: 16px 0;
+    font-size: 20px;
+}
+
+.alert>div input {
+    width: 16em;
+    height: 1.5em;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-indent: 0.3em;
+    font-size: 20px;
+}
+
+.alert>div input:focus {
+    outline: 2px dashed rgba(78, 78, 78, 0.7);
+}
+
+.errInput {
+    outline: 2px solid rgb(255, 69, 69);
+}
+
+.alert button, .win button {
+    float: right;
+    width: 60px;
+    height: 37px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 800;
+    background-image: linear-gradient(to right, rgb(110, 207, 245),rgb(114, 101, 230));
+    transition: .3 linear;
+}
+
+.alert button:hover, .win button:hover {
+    transform: scale(1.1);
+    border-radius: 10px;
 }
 
 .win {
-    position: relative;
-    top: 30%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    background-color: greenyellow;
+    width: 250px;
+    height: 120px;
 }
+
+.mag {
+    height: 62%;
+    padding-top: 10px;
+    word-break: break-all;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+

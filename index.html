@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学生信息管理系统</title>
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/popup.css">
     <script src="js/data.js"></script>
@@ -10,41 +11,45 @@
     <script src="js/popup.js" ></script>
 </head>
 <body>
-    <div id="main" class="clear">
-        <header>
-            <h1>学生信息管理系统</h1>
-        </header>
-        <div id="dataOperation">
-            <button>新增</button>
-            <button>删除</button>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        <label for="allCheck">
-                            <span>全选</span>
-                            <input type="checkbox" id="allCheck" value="unchecked">
-                        </label>
-                    </td>
-                    <td>序号</td>
-                    <td>学号</td>
-                    <td>姓名</td>
-                    <td>学院</td>
-                    <td>专业</td>
-                    <td>年级</td>
-                    <td>班级</td>
-                    <td>年龄</td>
-                    <td>操作</td>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <div id="information">第<span></span>页,共<span></span>条,(每页显示<span></span>条)</div>
-        <div id="turnPage">
-            <button>上一页</button>
-            <button>下一页</button>
+    <div id="container">
+        <div id="main" class="clear">
+            <div class="menu">
+                <div id="account">
+                    <div><img src="/img/photo.jpg" alt=""></div>
+                </div>
+                <div id="dataOperation">
+                    <button><span class="iconfont">&#xe680;</span>新增</button>
+                    <button><span class="iconfont">&#xe60c;</span> 删除</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <label for="allCheck">
+                                <input type="checkbox" id="allCheck" value="unchecked">
+                                <div></div>
+                            </label>
+                        </td>
+                        <td>序号</td>
+                        <td>学号</td>
+                        <td>姓名</td>
+                        <td>学院</td>
+                        <td>专业</td>
+                        <td>年级</td>
+                        <td>班级</td>
+                        <td>年龄</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div id="information">第<span></span>页,共<span></span>条,(每页显示<span></span>条)</div>
+            <div id="turnPage">
+                <button>上一页<span></span></button>
+                <button>下一页<span></span></button>
+            </div>
         </div>
     </div>
 </body>

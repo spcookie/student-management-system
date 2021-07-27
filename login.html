@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script src="js/login.js"></script>
+    <script src="js/loginData.js"></script>
+</head>
+
+<body>
+    <div id="container" class="clear">
+        <div class="title">
+            <h1>学生信息管理系统</h1>
+        </div>
+        <div class="content">
+            <div class="switch">
+                <span id="login" class="active">登录</span><span>/</span><span id="signUp">注册</span>
+            </div>
+            <form>
+                <label class="input" data-placeholder="账号" for="user"><input id="user" type="number" name="user"></label>
+                <label class="input" data-placeholder="密码"><input type="password" name="password"></label>
+                <label class="input hidden" data-placeholder="确认密码"><input type="password"></label>
+                <input class="button" type="button" value="登录">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
