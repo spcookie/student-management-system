@@ -16,23 +16,27 @@ window.addEventListener('load', () => {
     }
     //删除按钮绑定事件
     dataOp[1].onclick = () => {
-        let buttonIndexes = checkedButton();
-        let dataIndexes = [];
-        let deleteInquiry;
-        if (buttonIndexes.length !== 0) {
-            for (let i = 0; i < buttonIndexes.length; i++) {
-                dataIndexes[i] = (page - 1) * stripOfPage + buttonIndexes[i]++;
+        if (students_data.length !== 0) {
+            let buttonIndexes = checkedButton();
+            let dataIndexes = [];
+            let deleteInquiry;
+            if (buttonIndexes.length !== 0) {
+                for (let i = 0; i < buttonIndexes.length; i++) {
+                    dataIndexes[i] = (page - 1) * stripOfPage + buttonIndexes[i]++;
+                }
+                let tipsIndex = buttonIndexes.join(',');
+                deleteInquiry = new inquiry('确认删除第' + tipsIndex + '行？');
+            } else {
+                deleteInquiry = new inquiry('确认删除第1行?');
+                dataIndexes[0] = (page - 1) * stripOfPage;
             }
-            let tipsIndex = buttonIndexes.join(',');
-            deleteInquiry = new inquiry('确认删除第' + tipsIndex + '行？');
+            deleteInquiry.confirmEvent(() => {
+                deleteData(dataIndexes);
+                changeInfo(page);
+            });
         } else {
-            deleteInquiry = new inquiry('确认删除第1行?');
-            dataIndexes[0] = (page - 1) * stripOfPage;
+            wringAlert('表格中没有数据');
         }
-        deleteInquiry.confirmEvent(() => {
-            deleteData(dataIndexes);
-            changeInfo(page);
-        });
     }
     //页数
     window.page = 1;
@@ -67,32 +71,32 @@ window.addEventListener('load', () => {
         for (let i = index; i < index + length; i++) {
             let data = getData(i);
             tRow.push('<tr>\n' +
-                '                    <td><input type="checkbox" class="checkButton"></td>\n' +
-                '                    <td>' + (i + 1) + '</td>\n' +
-                '                    <td>' + data.number + '</td>\n' +
-                '                    <td>' + data.name + '</td>\n' +
-                '                    <td>' + data.college + '</td>\n' +
-                '                    <td>' + data.major + '</td>\n' +
-                '                    <td>' + data.grade + '</td>\n' +
-                '                    <td>' + data.clazz + '</td>\n' +
-                '                    <td>' + data.age + '</td>\n' +
-                '                    <td colspan="2"><button class="view">查看</button><button class="modify">修改</button></td>\n' +
-                '                </tr>');
+                '<td><input type="checkbox" class="checkButton"></td>\n' +
+                '<td>' + (i + 1) + '</td>' +
+                '<td>' + data.number + '</td>' +
+                '<td>' + data.name + '</td>' +
+                '<td>' + data.college + '</td>' +
+                '<td>' + data.major + '</td>' +
+                '<td>' + data.grade + '</td>' +
+                '<td>' + data.clazz + '</td>' +
+                '<td>' + data.age + '</td>' +
+                '<td colspan="2"><button class="view">查看</button><button class="modify">修改</button></td>' +
+                '</tr>');
         }
         //补全表格
         for (let i = 0; i < stripOfPage - length; i++) {
-            tRow.push('<tr>\n' +
-                '                    <td>&nbsp;</td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td></td>\n' +
-                '                    <td colspan="2">&nbsp;</td>\n' +
-                '                </tr>');
+            tRow.push('<tr>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td colspan="2"></td>' +
+                '</tr>');
         }
         tbody.innerHTML = tRow.join('');
         //其他选择按钮
@@ -146,76 +150,96 @@ window.addEventListener('load', () => {
         }
     }
 
-    //修改查看按钮绑定事件
-    function viewAndModifyEvent() {
-        //查看、修改按钮
-        const view = document.getElementsByClassName('view');
-        const modify = document.getElementsByClassName('modify');
-        const count = view.length;
-        for (let i = 0; i < count; i++) {
-            view[i].onclick = () => {
-                let dataIndex = page - 1 + i;
-                new popup(2).createPopup(dataIndex);
-            };
-            modify[i].onclick = () => {
-                let dataIndex = page - 1 + i;
-                new popup(1).createPopup(dataIndex);
-            };
-        }
-    }
-
-    //获取两个翻页按钮
-    const turnPage = document.querySelector('#turnPage').children;
-    //翻页键点击波纹效果
-    for (let i = 0; i < 2; i++) {
-        turnPage[i].addEventListener('click', (e) => {
-            let bg = turnPage[i].children[0];
-            bg.style.top = e.offsetY + 'px';
-            bg.style.left = e.offsetX + 'px';
-            bg.classList.add('wave');
-            setTimeout(() => {
-                bg.className = '';
-            }, 500);
+    //排序
+    let tdButton = document.getElementsByTagName('thead')[0].children[0].children[2].children[0];
+    tdButton.addEventListener('click', function up() {
+        students_data = students_data.sort((a, b) => {
+            return a.number - b.number;
         });
+        changeInfo(page);
+        this.removeEventListener('click', up);
+        this.addEventListener('click', function down() {
+            window.students_data = students_data.sort((a, b) => {
+                return b.number - a.number;
+            });
+            changeInfo(page);
+            this.removeEventListener('click', down);
+            this.addEventListener('click', up);
+        });
+    })
+
+//修改查看按钮绑定事件
+function viewAndModifyEvent() {
+    //查看、修改按钮
+    const view = document.getElementsByClassName('view');
+    const modify = document.getElementsByClassName('modify');
+    const count = view.length;
+    for (let i = 0; i < count; i++) {
+        view[i].onclick = () => {
+            let dataIndex = page - 1 + i;
+            new popup(2).createPopup(dataIndex);
+        };
+        modify[i].onclick = () => {
+            let dataIndex = page - 1 + i;
+            new popup(1).createPopup(dataIndex);
+        };
     }
+}
 
-    //向上翻页
-    (function pageUp() {
-        turnPage[0].addEventListener('click', () => {
-            if (page === 1) {
-                pageAlert('已是第一页!');
-            } else {
-                page--;
-                changeInfo(page);
-            }
-        })
-    })();
-    //向下翻页
-    (function pageDown() {
-        turnPage[1].addEventListener('click', () => {
-            if (page * stripOfPage >= students_data.length) {
-                pageAlert('已是最后一页!');
-            } else {
-                page++;
-                changeInfo(page);
-            }
-        })
-    })();
+//获取两个翻页按钮
+const turnPage = document.querySelector('#turnPage').children;
+//翻页键点击波纹效果
+for (let i = 0; i < 2; i++) {
+    turnPage[i].addEventListener('click', (e) => {
+        let bg = turnPage[i].children[0];
+        bg.style.top = e.offsetY + 'px';
+        bg.style.left = e.offsetX + 'px';
+        bg.classList.add('wave');
+        setTimeout(() => {
+            bg.className = '';
+        }, 500);
+    });
+}
 
-    //翻页弹窗
-    function pageAlert(massage) {
-        if (main.children.length === 4) {
-            const pageWring = document.createElement('div');
-            pageWring.classList.add('pageWring');
-            const main = document.getElementById('main');
-            pageWring.innerHTML = massage;
-            main.appendChild(pageWring);
-            setTimeout(() => {
-                main.removeChild(pageWring);
-            }, 800);
+//向上翻页
+(function pageUp() {
+    turnPage[0].addEventListener('click', () => {
+        if (page === 1) {
+            wringAlert('已是第一页!');
+        } else {
+            page--;
+            changeInfo(page);
         }
-    }
+    })
+})();
+//向下翻页
+(function pageDown() {
+    turnPage[1].addEventListener('click', () => {
+        if (page * stripOfPage >= students_data.length) {
+            wringAlert('已是最后一页!');
+        } else {
+            page++;
+            changeInfo(page);
+        }
+    })
+})();
 
-    //第一次添加信息
-    changeInfo(page);
-});
+const main = document.getElementById('main');
+//翻页弹窗
+function wringAlert(massage) {
+    //判断main中的元素个数->4表示弹窗还存在
+    if (main.children.length === 4) {
+        const pageWring = document.createElement('div');
+        pageWring.classList.add('wring');
+        pageWring.innerHTML = massage;
+        main.appendChild(pageWring);
+        setTimeout(() => {
+            main.removeChild(pageWring);
+        }, 800);
+    }
+}
+
+//第一次添加信息
+changeInfo(page);
+})
+;

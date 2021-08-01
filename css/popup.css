@@ -70,7 +70,7 @@
     font-size: 16px;
     font-weight: 800;
     background-image: linear-gradient(to right, rgb(110, 207, 245),rgb(114, 101, 230));
-    transition: .3 linear;
+    transition: .3s linear;
 }
 
 .alert button:hover, .win button:hover {
@@ -90,5 +90,30 @@
     font-size: 20px;
     font-weight: 600;
     color: rgb(0, 0, 0);
+}
+
+/*翻页键弹窗*/
+body div.wring {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    padding: 16px;
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    border-radius: 16px;
+    background-color: rgba(255, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    font-size: 20px;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    animation: show .2s 1;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 

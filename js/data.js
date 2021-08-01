@@ -1,118 +1,27 @@
-
-//账户数据ID
-let studentDataID = [];
-
-studentDataID.push([
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020122',
-        name: '徐浩',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    },
-    {
-        number: '12023020121',
-        name: '刘伟翔',
-        college: '两江人工智能学院',
-        major: '软件工程',
-        grade: '2020',
-        clazz: '1',
-        age: '19'
-    }
-]);
-
 //账户学生数据
 let students_data = [];
+
+//账户ID
+let ID;
 
 //获取账户中数据
 (function getDataFromAccount() {
     const info = window.location.search;
-    const ID = info.substr(4, 1);
-    students_data = studentDataID[ID];
+    ID = info.substr(4, 1);
+    let data = eval(window.localStorage.getItem(ID));
+    if (data != null) {
+        students_data = data;
+    }
 })();
+
+/**
+ * [{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"},{"number":"11503080201","name":"张三","college":"计算机科学与工程学院","major":"软件工程","grade":"2015","clazz":"2","age":"21"},{"number":"11502070102","name":"李四","college":"会计学院","major":"会计学","grade":"2015","clazz":"1","age":"19"},{"number":"11506080403","name":"王二麻子","college":"理学院","major":"数学","grade":"2015","clazz":"3","age":"20"}]
+ */
+
+//当页面关闭或刷新时保存数据
+window.onbeforeunload = function () {
+    window.localStorage.setItem(ID, JSON.stringify(students_data));
+};
 
 //学生数据对象
 window.createData = function (number, name, college, major, grade, clazz, age) {

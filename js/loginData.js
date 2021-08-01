@@ -1,12 +1,5 @@
 //账号密码数据
-let account_data = [
-    {
-        name: '咸小鱼',
-        id: 0,
-        account: '123456',
-        password: '123456'
-    }
-];
+let account_data = eval(window.localStorage.getItem('account_data'));
 
 window.loginActive = function (account, password) {
     for (let i = 0; i < account_data.length; i++) {

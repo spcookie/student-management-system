@@ -48,7 +48,6 @@ html {
     font-size: 22px;
     background: linear-gradient(to right, rgb(67,203,255),rgb(151,8,204));
     -webkit-background-clip: text;
-    background-clip: text;
 }
 
 .menu #dataOperation button::after {
@@ -99,7 +98,7 @@ thead tr {
 
 /*表格边框*/
 table,td{
-    border-spacing: 0px;
+    border-collapse: collapse;
     color: rgb(0, 0, 0);
 }
 
@@ -109,21 +108,45 @@ td {
     padding: 0 5px;
 }
 
-/* table thead td:nth-of-type(1) {
-    border-top-left-radius: 30px;
+
+thead td button {
+    font-size: 18px;
+    background-color: transparent;
 }
 
-table thead td:last-of-type {
-    border-top-right-radius: 30px;
+/*表格头点击事件样式变化*/
+thead tr td:nth-of-type(3):active {
+    background-color: rgb(144, 103, 255);
+    background-clip: padding-box;
 }
 
-table tbody tr:last-of-type td:first-of-type {
-    border-bottom-left-radius: 30px;
+tr>td:nth-of-type(2) {
+    width: 45px;
 }
-
-table tbody tr:last-of-type td:last-of-type {
-    border-bottom-right-radius: 30px;
-} */
+tr>td:nth-of-type(3) {
+    width: 125px;
+}
+tr>td:nth-of-type(4) {
+    width: 78px;
+}
+tr>td:nth-of-type(5) {
+    width: 193px;
+}
+tr>td:nth-of-type(6) {
+    width: 78px;
+}
+tr>td:nth-of-type(7) {
+    width: 47px;
+}
+tr>td:nth-of-type(8) {
+    width: 45px;
+}
+tr>td:nth-of-type(9) {
+     width: 45px;
+ }
+tr>td:nth-of-type(10) {
+    width: 130px;
+}
 
 table tbody td {
     height: 26px;
@@ -306,29 +329,5 @@ div#turnPage button {
     }
     100% {
         opacity: 0;
-    }
-}
-
-body div.pageWring {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    padding: 16px;
-    border: 2px solid rgba(255, 0, 0, 0.3);
-    border-radius: 16px;
-    background-color: rgba(255, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-    font-size: 20px;
-    font-weight: 800;
-    color: rgb(255, 255, 255);
-    animation: show .2s 1;
-}
-
-@keyframes show {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
     }
 }

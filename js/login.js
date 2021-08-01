@@ -30,6 +30,7 @@ window.addEventListener('load', () => {
                 button.value = '登录';
             }
             clearInput();
+            forms[0].children[0].
             forms[2].className = classNames;
         };
     }
@@ -37,7 +38,7 @@ window.addEventListener('load', () => {
     //清空输入框
     function clearInput() {
         for (let i = 0; i < 3; i++) {
-            forms[i].children[0].value = '';
+            forms[i].children[0].value = null;
         }
     }
     //输入框获得光标焦点动画, 清除错误输入警告
