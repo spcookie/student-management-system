@@ -126,19 +126,25 @@ window.popup = function (typeCode) {
     function confirmClick(typeCode, index) {
         submit.onclick = () => {
             let data = getDataFromInput(getInputBox());
-            const errCodes = isCorrectData(data);
-            if (errCodes.length === 0) {
-                if (typeCode === 0) {
+            let errCodes;
+            if (typeCode === 0) {
+                errCodes = isCorrectData(data);
+                if (errCodes.length === 0) {
                     addData(data);
-                } else if (typeCode === 1) {
-                    changeData(data, index);
+                    changeInfo(page);
+                    mask.remove();
                 } else {
-                    window.alert('发生了错误,请重新输入');
+                    clearInputValue(getInputBox(), errCodes);
                 }
-                changeInfo(page);
-                mask.remove();
-            } else {
-                clearInputValue(getInputBox(), errCodes);
+            } else if (typeCode === 1) {
+                errCodes = isCorrectData(data, false);
+                if (errCodes.length === 0) {
+                    changeData(data, index);
+                    changeInfo(page);
+                    mask.remove();
+                } else {
+                    clearInputValue(getInputBox(), errCodes);
+                }
             }
         }
     }

@@ -116,7 +116,7 @@ thead td button {
 
 /*表格头点击事件样式变化*/
 thead tr td:nth-of-type(3):active {
-    background-color: rgb(144, 103, 255);
+    background-color: rgb(131, 100, 216);
     background-clip: padding-box;
 }
 
@@ -256,6 +256,11 @@ tbody button.modify {
 }
 
 /* 查看，修改键发光 */
+tbody tr td:nth-last-of-type(1) {
+    position: relative;
+    z-index: 0;
+}
+
 tbody tr td:nth-last-of-type(1) button::after {
     content: '';
     display: block;

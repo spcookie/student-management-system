@@ -49,7 +49,7 @@ function getDataFromInput(inputBox) {
 //添加数据到学生数据中
 function addData(data) {
     const oneOfData = new createData(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
-    students_data.push(oneOfData);
+    students_data.unshift(oneOfData);
 }
 
 //修改学生数据
@@ -81,10 +81,8 @@ const matching = {
                 return false;
             }
         }
-        if (pattern.exec(num) == null) {
-            return false;
-        }
-        return true;
+        return pattern.exec(num) != null;
+
     },
     name: function (name) {
         const pattern = /^[\u4e00-\u9fa5]{0,4}$/;
@@ -112,8 +110,10 @@ const matching = {
 //校验数据
 function isCorrectData(data) {
     let errCodes = [];
-    if (!matching.num(data[0])) {
-        errCodes.push(0);
+    if (arguments[1] !== false) {
+        if (!matching.num(data[0])) {
+            errCodes.push(0);
+        }
     }
     if (!matching.name(data[1])) {
         errCodes.push(1);

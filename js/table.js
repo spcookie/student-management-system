@@ -32,10 +32,17 @@ window.addEventListener('load', () => {
             }
             deleteInquiry.confirmEvent(() => {
                 deleteData(dataIndexes);
-                changeInfo(page);
+                changeInfo(pageDecrease(page));
             });
         } else {
             wringAlert('表格中没有数据');
+        }
+    }
+
+    //删除元素表格为空时跳转页面
+    function pageDecrease(page) {
+        if (countOfPage(page) === 0) {
+            return --page;
         }
     }
 
