@@ -70,7 +70,7 @@
     font-size: 16px;
     font-weight: 800;
     background-image: linear-gradient(to right, rgb(110, 207, 245),rgb(114, 101, 230));
-    transition: .3s linear;
+    transition: .2s linear;
 }
 
 .alert button:hover, .win button:hover {

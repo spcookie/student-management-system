@@ -26,6 +26,15 @@ html {
     color:rgb(166, 133, 255);
 }
 
+#container .title h1::after {
+    display: block;
+}
+
+.title img {
+    width: 100%;
+    margin-top: 10%;
+}
+
 .content {
     box-sizing: border-box;
     float: left;

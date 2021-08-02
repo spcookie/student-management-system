@@ -2,10 +2,10 @@ window.addEventListener('load', () => {
     //动态垂直居中
     const container = document.getElementById('container');
     let windowSize = document.documentElement.clientHeight;
-    container.style.marginTop = (windowSize - 500) / 2 + 'px';
+    container.style.marginTop = (windowSize - 570) / 2 + 'px';
     window.onresize = () => {
         windowSize = document.documentElement.clientHeight;
-        container.style.marginTop = (windowSize - 500) / 2 + 'px';
+        container.style.marginTop = (windowSize - 570) / 2 + 'px';
     }
 
     //获取新增、删除按钮
@@ -38,16 +38,18 @@ window.addEventListener('load', () => {
             wringAlert('表格中没有数据');
         }
     }
+
     //页数
     window.page = 1;
     //每页的条数
     window.stripOfPage = 10;
+
     //获取表格tbody
     const tbody = document.querySelector('tbody');
     //全选按钮
     const allCheck = document.getElementById('allCheck');
     //选择按钮
-    let checkButton;
+    let checkButton = document.getElementsByClassName('checkButton');
 
     //获取'被选中的按钮'下标
     function checkedButton() {
@@ -132,8 +134,6 @@ window.addEventListener('load', () => {
 
     //其他选择按钮绑定事件
     function checkButtonEvent() {
-        //获取选择按钮
-        checkButton = document.getElementsByClassName('checkButton');
         //选择按钮绑定事件
         for (let i = 0; i < checkButton.length; i++) {
             checkButton[i].addEventListener('click', function () {
@@ -227,7 +227,7 @@ for (let i = 0; i < 2; i++) {
 const main = document.getElementById('main');
 //翻页弹窗
 function wringAlert(massage) {
-    //判断main中的元素个数->4表示弹窗还存在
+    //判断main中的元素个数->4表示弹窗不存在
     if (main.children.length === 4) {
         const pageWring = document.createElement('div');
         pageWring.classList.add('wring');
