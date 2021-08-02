@@ -168,78 +168,79 @@ window.addEventListener('load', () => {
         });
     })
 
-//修改查看按钮绑定事件
-function viewAndModifyEvent() {
-    //查看、修改按钮
-    const view = document.getElementsByClassName('view');
-    const modify = document.getElementsByClassName('modify');
-    const count = view.length;
-    for (let i = 0; i < count; i++) {
-        view[i].onclick = () => {
-            let dataIndex = page - 1 + i;
-            new popup(2).createPopup(dataIndex);
-        };
-        modify[i].onclick = () => {
-            let dataIndex = page - 1 + i;
-            new popup(1).createPopup(dataIndex);
-        };
-    }
-}
-
-//获取两个翻页按钮
-const turnPage = document.querySelector('#turnPage').children;
-//翻页键点击波纹效果
-for (let i = 0; i < 2; i++) {
-    turnPage[i].addEventListener('click', (e) => {
-        let bg = turnPage[i].children[0];
-        bg.style.top = e.offsetY + 'px';
-        bg.style.left = e.offsetX + 'px';
-        bg.classList.add('wave');
-        setTimeout(() => {
-            bg.className = '';
-        }, 500);
-    });
-}
-
-//向上翻页
-(function pageUp() {
-    turnPage[0].addEventListener('click', () => {
-        if (page === 1) {
-            wringAlert('已是第一页!');
-        } else {
-            page--;
-            changeInfo(page);
+    //修改查看按钮绑定事件
+    function viewAndModifyEvent() {
+        //查看、修改按钮
+        const view = document.getElementsByClassName('view');
+        const modify = document.getElementsByClassName('modify');
+        const count = view.length;
+        for (let i = 0; i < count; i++) {
+            view[i].onclick = () => {
+                let dataIndex = (page - 1) * stripOfPage + i;
+                new popup(2).createPopup(dataIndex);
+            };
+            modify[i].onclick = () => {
+                let dataIndex = (page - 1) * stripOfPage + i;
+                new popup(1).createPopup(dataIndex);
+            };
         }
-    })
-})();
-//向下翻页
-(function pageDown() {
-    turnPage[1].addEventListener('click', () => {
-        if (page * stripOfPage >= students_data.length) {
-            wringAlert('已是最后一页!');
-        } else {
-            page++;
-            changeInfo(page);
-        }
-    })
-})();
-
-const main = document.getElementById('main');
-//翻页弹窗
-function wringAlert(massage) {
-    //判断main中的元素个数->4表示弹窗不存在
-    if (main.children.length === 4) {
-        const pageWring = document.createElement('div');
-        pageWring.classList.add('wring');
-        pageWring.innerHTML = massage;
-        main.appendChild(pageWring);
-        setTimeout(() => {
-            main.removeChild(pageWring);
-        }, 800);
     }
-}
 
-//第一次添加信息
-changeInfo(page);
-})
-;
+    //获取两个翻页按钮
+    const turnPage = document.querySelector('#turnPage').children;
+    //翻页键点击波纹效果
+    for (let i = 0; i < 2; i++) {
+        turnPage[i].addEventListener('click', (e) => {
+            let bg = turnPage[i].children[0];
+            if (bg.className === '') {
+                bg.style.top = e.offsetY + 'px';
+                bg.style.left = e.offsetX + 'px';
+                bg.classList.add('wave');
+                setTimeout(() => {
+                    bg.className = '';
+                }, 500);
+            }
+        });
+    }
+
+    //向上翻页
+    (function pageUp() {
+        turnPage[0].addEventListener('click', () => {
+            if (page === 1) {
+                wringAlert('已是第一页!');
+            } else {
+                page--;
+                changeInfo(page);
+            }
+        })
+    })();
+    //向下翻页
+    (function pageDown() {
+        turnPage[1].addEventListener('click', () => {
+            if (page * stripOfPage >= students_data.length) {
+                wringAlert('已是最后一页!');
+            } else {
+                page++;
+                changeInfo(page);
+            }
+        })
+    })();
+
+    const main = document.getElementById('main');
+    //翻页弹窗
+    function wringAlert(massage) {
+        //判断main中的元素个数->4表示弹窗不存在
+        if (main.children.length === 4) {
+            const pageWring = document.createElement('div');
+            pageWring.classList.add('wring');
+            pageWring.innerHTML = massage;
+            main.appendChild(pageWring);
+            setTimeout(() => {
+                main.removeChild(pageWring);
+            }, 800);
+        }
+    }
+
+    //第一次添加信息
+    changeInfo(page);
+});

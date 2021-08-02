@@ -1,5 +1,5 @@
 html {
-    background-image: url("../img/SummerByGydwin.png");
+    background-color: rgb(197, 197, 197);
 }
 
 /*主要内容*/
@@ -47,7 +47,7 @@ html {
     height: 50px;
     color: transparent;
     font-size: 22px;
-    background: linear-gradient(to right, rgb(67,203,255),rgb(151,8,204));
+    background: linear-gradient(to right, rgb(0, 183, 255),rgb(187, 0, 255));
     -webkit-background-clip: text;
 }
 
@@ -92,19 +92,19 @@ table {
 
 thead tr {
     height: 50px;
-    background-color: rgba(144, 103, 255, 0.6);
+    background-color: rgba(144, 103, 255, 1);
     font-size: 18px;
     font-weight: 800;
 }
 
 /*表格边框*/
 table,td{
-    border-collapse: collapse;
+    border-spacing: 0;
     color: rgb(0, 0, 0);
 }
 
 td {
-    border: rgb(191, 170, 212) 1px solid;
+    border: rgb(138, 126, 148) 1px solid;
     text-align: center;
     padding: 0 5px;
 }
@@ -155,11 +155,11 @@ table tbody td {
 
 /*隔行变色效果*/
 table>tbody>tr:nth-of-type(2n + 1) {
-    background-color: rgba(203, 184, 255, 0.6);
+    background-color: rgba(203, 184, 255, 1);
 }
 
 table>tbody>tr:nth-of-type(2n) {
-    background-color: rgba(181, 154, 254, 0.6);
+    background-color: rgba(181, 154, 254, 1);
 }
 
 /* 全选按钮 */

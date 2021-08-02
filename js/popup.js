@@ -109,6 +109,7 @@ window.popup = function (typeCode) {
                 confirmClick(0);
                 break;
             case 1:
+                getInputBox()[0].disabled = true;
                 addDataToAlert(getData(arguments[0]), getInputBox());
                 alert.appendChild(submit);
                 confirmClick(1, arguments[0]);

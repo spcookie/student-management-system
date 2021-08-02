@@ -76,7 +76,15 @@ function deleteData(indexes) {
 const matching = {
     num: function (num) {
         const pattern = /^[\d]{11}$/;
-        return pattern.exec(num) != null;
+        for (let i = 0; i < students_data.length; i++) {
+            if(students_data[i].number === num) {
+                return false;
+            }
+        }
+        if (pattern.exec(num) == null) {
+            return false;
+        }
+        return true;
     },
     name: function (name) {
         const pattern = /^[\u4e00-\u9fa5]{0,4}$/;
