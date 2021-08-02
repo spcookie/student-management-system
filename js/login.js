@@ -74,7 +74,6 @@ window.addEventListener('load', () => {
                     forms[0].children[0].classList.add('err');
                     return false;
                 } else {
-                    clearInput();
                     window.location.replace('index.html?id=' + infoCode);
                 }
             }
